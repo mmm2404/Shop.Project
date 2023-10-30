@@ -4,40 +4,28 @@ import { commentsRouter } from "./src/api/comments-api"
 import { productsRouter } from "./src/api/products-api";
 import { authRouter } from "./src/api/auth-api";
 
-// export let connection: Connection;
-
-// export default function (dbConnection: Connection): Express {
-//     const app = express();
-
-//     app.use(express.json());
-
-//     connection = dbConnection;
-//     app.use( (req, res, next) => {
-//         let err = null;
-//         try { decodeURIComponent(req.path); }
-//         catch(e) { err = e;}
-//         if (err){
-//             console.log(err, req.path);
-//             res.send('400 Bad Request');    
-//         }else next();
-//     });
-
-//     app.use("/comments", commentsRouter);
-//     app.use("/products", productsRouter);
-//     app.use("/auth", authRouter);
-   
-
-//     return app;
-// }
 export let connection: Connection;
 
 export default function (dbConnection: Connection): Express {
-  const app = express();
-  app.use(express.json());
-  connection = dbConnection;
+    const app = express();
 
-  app.use("/comments", commentsRouter);
-  app.use("/products", productsRouter);
-  app.use("/auth", authRouter);
-  return app;
+    app.use(express.json());
+
+    connection = dbConnection;
+    app.use( (req, res, next) => {
+        let err = null;
+        try { decodeURIComponent(req.path); }
+        catch(e) { err = e;}
+        if (err){
+            console.log(err, req.path);
+            res.send('400 Bad Request');    
+        }else next();
+    });
+
+    app.use("/comments", commentsRouter);
+    app.use("/products", productsRouter);
+    app.use("/auth", authRouter);
+   
+
+    return app;
 }
