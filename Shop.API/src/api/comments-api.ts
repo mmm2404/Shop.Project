@@ -4,7 +4,7 @@ import { validateComment } from "../helpers";
 import { v4 as uuidv4 } from 'uuid';
 import { connection } from '../../index';
 import { mapCommentsEntity } from '../services/mapping';
-import {OkPacket} from "mysql2";
+import { OkPacket } from "mysql2";
 import {COMMENT_DUPLICATE_QUERY,INSERT_COMMENT_QUERY} from "../services/queries";
 import { IComment} from "@Shared/types";
 import { param, validationResult } from "express-validator";
@@ -19,7 +19,7 @@ import { param, validationResult } from "express-validator";
         "SELECT * FROM comments"
     );
     
-        // res.setHeader("Content-Type", "application/json");
+        res.setHeader("Content-Type", "application/json");
         res.send(mapCommentsEntity(comments));
     }
 
@@ -56,7 +56,7 @@ async (req: Request<{ id: string }>, res: Response) => {
       return;
     }
 
-    // res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
     res.send(mapCommentsEntity(rows)[0]);
   } catch (e) {
     console.debug(e.message);

@@ -1,11 +1,12 @@
 import mysql, { Connection } from "mysql2/promise";
+
 const { DB_HOST, DB_PORT, DB_PASSWORD, DB_USER, DB_NAME } = process.env;
 
     export async function initDataBase(): Promise<Connection | null> {
         let connection: Connection | null = null;
       
         try {
-            connection = await mysql.createConnection({
+                connection = await mysql.createConnection({
                 host: DB_HOST,
                 port: Number(DB_PORT),
                 password: DB_PASSWORD,

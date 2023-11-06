@@ -15,7 +15,8 @@ export interface ICommentEntity extends RowDataPacket {
 export type ImageCreatePayload = Omit<IProductImage, "id" | "productId">;
 
 export type ProductCreatePayload =
-  Omit<IProduct, "id" | "comments" | "thumbnail" | "images"> & { images: ImageCreatePayload[] };export interface IProductEntity extends IProduct, RowDataPacket{
+  Omit<IProduct, "id" | "comments" | "thumbnail" | "images"> & 
+  { images: ImageCreatePayload[] };export interface IProductEntity extends IProduct, RowDataPacket{
     product_id:string;
 }
 
