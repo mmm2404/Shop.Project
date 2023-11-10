@@ -54,7 +54,7 @@ getProduct(productId,doSuccessProduct,doErrorProduct); }
 useEffect(() => {
 
 dispatch(setComments(product.comments));  
-}, []);
+}, [dispatch, product.comments]);
 
 // загрузчик состояние
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -73,19 +73,13 @@ const comments = useSelector((state: RootState) => {
     productImagesReactNodes = product.images.map(element => (
       (element.id !== product.thumbnail?.id) && <ItemImage key={element.id} src={element.url} />
     ))
-// коменты
+// коментарии
   let productCommentsReactNodes;
   if (comments)
     productCommentsReactNodes = comments.map(element => (
       <ItemComment key={element.id} name={element.name} body={element.body} />
     ))
-// похожие
-//   let productSimilarReactNodes;
-//   if (!(!similars))
-//     productSimilarReactNodes = similars.map(element => (
-//       <ItemSimilar key={element.id} title={element.title} price={element.price} />
-//     ))
-    
+
   return (
     <div className="item">
       {loading && <Loader />}
@@ -111,7 +105,7 @@ const comments = useSelector((state: RootState) => {
 
       <div className="line" ></div>
 
-      {/* <!-- коментарии --> */}
+
       {!loading && <div className="item-title-header"> Comments </div>}
       {!loading && <div className="item-comments">
         {productCommentsReactNodes}
@@ -119,14 +113,14 @@ const comments = useSelector((state: RootState) => {
 
       <div className="line" ></div>
 
-      {/* <!--ввод нового  коментария --> */}
+ 
       {!loading && <AddComment product={product} productComments = {comments} />}
 
       <div className="line" ></div>
 
       {!loading && <div className="item-title-header"> Similars </div>}
       {!loading && <div className="similars">
-        {/* {productSimilarReactNodes} */}
+    
       </div>
       }
     </div>
