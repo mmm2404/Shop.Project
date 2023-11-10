@@ -4,7 +4,7 @@ import { validateComment } from "../helpers";
 import { v4 as uuidv4 } from 'uuid';
 import { connection } from '../../index';
 import { mapCommentsEntity } from '../services/mapping';
-import { OkPacket } from "mysql2";
+import { ResultSetHeader } from "mysql2";
 import {COMMENT_DUPLICATE_QUERY,INSERT_COMMENT_QUERY} from "../services/queries";
 import { IComment} from "@Shared/types";
 import { param, validationResult } from "express-validator";
@@ -96,7 +96,7 @@ commentsRouter.post('/', async (req: Request<{}, {}, CommentCreatePayload>, res:
 
   const id = uuidv4();
 
- await connection.query< OkPacket >(INSERT_COMMENT_QUERY, [
+ await connection.query< ResultSetHeader>(INSERT_COMMENT_QUERY, [
   id,
   email,
   name,
@@ -139,7 +139,7 @@ commentsRouter.patch('/', async (
         updateQuery += " WHERE comment_id = ?";
         valuesToUpdate.push(req.body.id);
 
-        const [info] = await connection.query < OkPacket> (updateQuery, valuesToUpdate);
+        const [info] = await connection.query < ResultSetHeader> (updateQuery, valuesToUpdate);
 
         if (info.affectedRows === 1) {
             res.status(200);
@@ -157,7 +157,7 @@ commentsRouter.patch('/', async (
         }
 
         const id = uuidv4();
-        await connection.query < OkPacket > (
+        await connection.query < ResultSetHeader > (
             INSERT_COMMENT_QUERY,
             [id, newComment.email, newComment.name, newComment.body, newComment.productId]
         );
@@ -173,7 +173,7 @@ commentsRouter.patch('/', async (
 
 commentsRouter.delete('/:id', async (req: Request<{ id: string }>, res: Response) => {
   try {
-    const [info] = await connection.query< OkPacket>(
+    const [info] = await connection.query< ResultSetHeader>(
       "DELETE FROM comments WHERE comment_id = ?",
       [req.params.id]
     );

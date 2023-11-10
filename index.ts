@@ -8,7 +8,7 @@ import ShopAdmin from "./Shop.Admin";
 
 
 export let server: Express;
-export let connection: Connection;
+export let connection: Connection | null;
 
 async function launchApplication() {
     server = initServer();
@@ -18,7 +18,7 @@ async function launchApplication() {
 }
 
 function initRouter() {
-    const shopApi = ShopAPI(connection);
+    const shopApi = ShopAPI(connection!);
     server.use("/api", shopApi);
 
     const shopAdmin = ShopAdmin();

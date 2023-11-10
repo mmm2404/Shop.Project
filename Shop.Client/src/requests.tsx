@@ -7,13 +7,9 @@ export const getProduct = async (
   doSuccessProduct: (data: IProduct) => void,
   doErrorProduct: () => void) => {
 
-  const config = {
-    method: 'get',
-    url: `http://localhost:3000/api/products/${id}`,
-    headers: { 'Content-Type': 'application/json' },
-  }
 
-  await axios(config)
+
+  await axios.get(`http://localhost:3000/api/products/${id}`)
     .then(response => {
       console.log('Response', response.data)
       const data: IProduct = response.data;
@@ -31,12 +27,8 @@ export const getSimilar = async (
   doSuccessSimilar: (data: ISimilar[]) => void,
   doErrorSimilar: () => void) => {
 
-  const config = {
-    method: 'get',
-    url: `http://localhost:3000/api/products/similars/${id}`,
-    headers: { 'Content-Type': 'application/json' },
-  }
-  await axios(config)
+
+  await axios.get(`http://localhost:3000/api/products/similars/${id}`)
     .then(response => {
       console.log('Response', response.data)
       const data: ISimilar[] = response.data;
@@ -51,28 +43,16 @@ export const getSimilar = async (
 }
 
 export const setNewComment = async (
-  productId: string,
-  name: string,
-  email: string,
-  body: string,
+  _productId: string,
+  _name: string,
+  _email: string,
+  _body: string,
   doSuccessNewComment: (data: string) => void,
   doErrorNewComment: () => void
 ) => {
 
-  const config = {
-    method: 'post',
-    url: `http://localhost:3000/api/comments`,
-    data: {      
-      name: name,
-      email: email,
-      body: body,
-      productId: productId
-    }
-  }
 
-  
-
-  await axios(config)
+  await axios.get(`http://localhost:3000/api/comments`)
     .then(response => {
       // console.log('Response', response.data)
       const data: string = response.data;
@@ -89,16 +69,8 @@ export const setNewComment = async (
 // http://localhost:3000/api/products/
 export const getProducts = async (doSuccess: (data: IProduct[]) => void, doError: () => void) => {
 
-  const config = {
-    method: 'get',
-    url: 'http://localhost:3000/api/products',
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json'
-    },
-  }
 
-  await axios(config)
+  await axios.get('http://localhost:3000/api/products')
     .then(response => {
       console.log('Response', response.data)
       const data: IProduct[] = response.data;

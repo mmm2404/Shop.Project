@@ -5,7 +5,6 @@ import { RootState,useAppDispatch } from "../../main";
 import { ItemImage } from "../ItemImage/itemimage";
 import { ItemComment } from "../ItemComment/itemcomment";
 import { AddComment } from "../AddComment/addcomment";
-// import { ProductSimilar } from "../ProductSimilar/productSimilar"
 import { useParams } from "react-router-dom";
 import { Loader } from "../Loader/loader"
 import { IProduct } from "../../redux/types";
